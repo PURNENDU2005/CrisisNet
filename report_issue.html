@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report an Issue</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #f5f7fa, #c3cfe2); /* Soft gradient background */
+            color: #333;
+        }
+
+        header {
+            background: #1e3a8a; /* Deep blue header */
+            color: #f9fafb; /* Very light gray text */
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #f9fafb; /* White text for nav links */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #d1d5db; /* Light gray on hover */
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            padding: 25px;
+            max-width: 800px;
+            width: 100%;
+            border: 2px solid #4f46e5; /* Indigo border */
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+        }
+
+        .card h2 {
+            color: #4f46e5; /* Indigo heading color */
+            margin-top: 0;
+            font-size: 2em;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db; /* Light gray border */
+            font-size: 16px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #4f46e5; /* Indigo focus border */
+            outline: none;
+            box-shadow: 0 0 5px rgba(79, 70, 229, 0.5);
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #4f46e5; /* Indigo button */
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4338ca; /* Darker indigo on hover */
+            transform: scale(1.05); /* Slight scale on hover */
+        }
+
+        .voice-button {
+            background-color: #34c759; /* Green button for voice */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .voice-button:hover {
+            background-color: #28a745; /* Darker green on hover */
+            transform: scale(1.05); /* Slight scale on hover */
+        }
+
+        .file-input {
+            margin-bottom: 15px;
+        }
+
+        .file-input input[type="file"] {
+            display: none;
+        }
+
+        .file-input label {
+            display: inline-block;
+            background-color: #4f46e5;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .file-input label:hover {
+            background-color: #4338ca; /* Darker indigo on hover */
+        }
+
+        .file-input .file-name {
+            display: block;
+            margin-top: 5px;
+            color: #333;
+        }
+
+        footer {
+            background: #1e3a8a; /* Deep blue footer */
+            color: #f9fafb; /* Very light gray text */
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Report an Issue</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="schemes.html">Government Schemes</a></li>
+                <li><a href="loans.html">Loans</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="card">
+                <h2>Report an Issue</h2>
+                <form id="issueForm">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="issueType">Issue Type:</label>
+                    <select id="issueType" name="issueType" required>
+                        <option value="">Select Issue Type</option>
+                        <option value="Technical">Technical Issue</option>
+                        <option value="Service">Service Issue</option>
+                        <option value="Feedback">Feedback</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="6" placeholder="You can also use the voice recording feature to describe your issue."></textarea>
+
+                    <!-- New Fields for More Details -->
+                    <label for="urgency">Urgency Level:</label>
+                    <select id="urgency" name="urgency" required>
+                        <option value="">Select Urgency Level</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+
+                    <label for="location">Location (if applicable):</label>
+                    <input type="text" id="location" name="location">
+
+                    <!-- File Uploads -->
+                    <div class="file-input">
+                        <label for="imageUpload">Upload Image:</label>
+                        <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
+                    </div>
+
+                    <div class="file-input">
+                        <label for="videoUpload">Upload Video:</label>
+                        <input type="file" id="videoUpload" name="videoUpload" accept="video/*">
+                    </div>
+
+                    <!-- Voice Recording Button -->
+                    <button type="button" class="voice-button" id="start-recording">Start Recording</button>
+                    <button type="submit">Submit Report</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Financial Assistance Portal. All rights reserved.</p>
+    </footer>
+    <script>
+        // JavaScript to handle form submission
+        document.getElementById('issueForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            // Retrieve form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const issueType = document.getElementById('issueType').value;
+            const description = document.getElementById('description').value;
+            const urgency = document.getElementById('urgency').value;
+            const location = document.getElementById('location').value;
+            const imageUpload = document.getElementById('imageUpload').files[0]; // Get the first file from the input
+            const videoUpload = document.getElementById('videoUpload').files[0]; // Get the first file from the input
+
+            // For now, just log the data to the console
+            console.log(`Name: ${name}`);
+            console.log(`Email: ${email}`);
+            console.log(`Issue Type: ${issueType}`);
+            console.log(`Description: ${description}`);
+            console.log(`Urgency: ${urgency}`);
+            console.log(`Location: ${location}`);
+            console.log(`Image Upload: ${imageUpload ? imageUpload.name : 'No file selected'}`);
+            console.log(`Video Upload: ${videoUpload ? videoUpload.name : 'No file selected'}`);
+        });
+
+        // Voice recognition setup
+        const startRecordingButton = document.getElementById('start-recording');
+        const descriptionTextArea = document.getElementById('description');
+        let recognition;
+
+        // Check if browser supports Web Speech API
+        if ('webkitSpeechRecognition' in window) {
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            recognition.onresult = function(event) {
+                const transcript = Array.from(event.results)
+                    .map(result => result[0])
+                    .map(result => result.transcript)
+                    .join('');
+                descriptionTextArea.value = transcript;
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error detected: ', event.error);
+            };
+
+            startRecordingButton.addEventListener('click', function() {
+                if (recognition) {
+                    recognition.start();
+                    startRecordingButton.textContent = 'Stop Recording';
+                    startRecordingButton.removeEventListener('click', startRecordingHandler);
+                    startRecordingButton.addEventListener('click', stopRecordingHandler);
+                }
+            });
+
+            function stopRecordingHandler() {
+                if (recognition) {
+                    recognition.stop();
+                    startRecordingButton.textContent = 'Start Recording';
+                    startRecordingButton.removeEventListener('click', stopRecordingHandler);
+                    startRecordingButton.addEventListener('click', startRecordingHandler);
+                }
+            }
+        } else {
+            alert('Your browser does not support the Web Speech API.');
+            startRecordingButton.disabled = true;
+        }
+    </script>
+</body>
+</html>
