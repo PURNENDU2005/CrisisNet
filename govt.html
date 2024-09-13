@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Schemes</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #003366;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            position: relative;
+        }
+        header img {
+            height: 40px;
+            vertical-align: middle;
+        }
+        nav {
+            margin-top: 0.5rem;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .hero {
+            background: url('https://via.placeholder.com/1500x600?text=Government+Schemes') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            padding: 4rem 1rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        .hero h1, .hero p {
+            position: relative;
+            z-index: 2;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 700;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            margin-top: 0.5rem;
+        }
+        .hero button {
+            background: #ff6600;
+            border: none;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+        .container {
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .card h3 {
+            margin: 1rem 0 0.5rem;
+            font-size: 1.25rem;
+            color: #003366;
+        }
+        .card p {
+            margin: 0;
+            font-size: 1rem;
+            color: #666;
+        }
+        .card button {
+            background: #003366;
+            border: none;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+        }
+        .card button:hover {
+            background: #002244;
+        }
+        .sidebar {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+        footer {
+            background: #003366;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        footer a {
+            color: #ff6600;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="f1.png" alt="Government Logo">
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#schemes">Schemes</a>
+        <a href="#contact">Contact</a>
+        <a href="#faq">FAQs</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Empowering Communities: Explore Government Schemes</h1>
+    <p>Discover programs designed to support and uplift citizens across various sectors.</p>
+    <button>Explore Schemes</button>
+</section>
+
+<div class="container">
+
+    <div class="card">
+        <img src="f2.png" alt="Scheme 1">
+        <h3>Disaster Relief and Assistance Programs</h3>
+        <p>Brief description of Scheme 1.</p>
+        <button>Learn More</button>
+    </div>
+
+    <div class="card">
+        <img src="f3.png" alt="Scheme 2">
+        <h3> Disaster Recovery and Rehabilitation Programs</h3>
+        <p>Brief description of Scheme 2.</p>
+        <button>Learn More</button>
+    </div>
+
+    <div class="card">
+        <img src="f4.png" alt="Healthcare">
+        <h3>Healthcare</h3>
+        <p>Explore healthcare-related schemes and benefits.</p>
+        <button>Explore</button>
+    </div>
+
+    <div class="card">
+        <img src="f5.png" alt="Education">
+        <h3>Education</h3>
+        <p>Find out more about educational support programs.</p>
+        <button>Explore</button>
+    </div>
+
+    <div class="card">
+        <img src="f6.png" alt="How to Apply">
+        <h3>How to Apply</h3>
+        <p>Guidelines and requirements for applying to schemes.</p>
+        <button>Apply Now</button>
+    </div>
+
+    <div class="card">
+        <img src="f7.png" alt="Success Story">
+        <h3>Success Stories</h3>
+        <p>Read testimonials and success stories from beneficiaries.</p>
+        <button>Read More</button>
+    </div>
+
+    <div class="card">
+        <img src="f8.png" alt="Updates">
+        <h3>Latest Updates</h3>
+        <p>Stay informed about the latest news and updates.</p>
+        <button>Subscribe</button>
+    </div>
+
+    <aside class="sidebar">
+        <h3>Quick Links</h3>
+        <ul>
+            <li><a href="#scheme1">Scheme 1</a></li>
+            <li><a href="#scheme2">Scheme 2</a></li>
+        </ul>
+        <h3>Contact Information</h3>
+        <p>Email: info@govschemes.gov</p>
+        <p>Phone: +123 456 7890</p>
+    </aside>
+
+</div>
+
+<footer>
+    <p>&copy; 2024 Government Schemes Portal. <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+    <div>
+        <a href="https://facebook.com" target="_blank">Facebook</a> |
+        <a href="https://twitter.com" target="_blank">Twitter</a> |
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    </div>
+</footer>
+
+</body>
+</html>
