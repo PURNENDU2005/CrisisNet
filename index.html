@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000000;
+            background: linear-gradient(135deg, #000000 0%, #000000 100%);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+        }
+
+        .intro-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            flex-direction: column;
+        }
+
+        .logo {
+            width: 300px;
+            height: 200px;
+            opacity: 0;
+            animation: fadeInOut 3s ease-in-out forwards;
+        }
+
+        .logo-text {
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            opacity: 0;
+            animation: fadeInOut 3s ease-in-out forwards;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.5);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="intro-container">
+        <img src="logo.png" alt="Logo" class="logo"> <!-- Replace with the path to your logo image -->
+        <div class="logo-text">CrisisNet</div>
+    </div>
+
+    <script>
+        // Automatically redirect to the next page after 3 seconds
+        setTimeout(() => {
+            window.location.href = "auth.html"; // Replace with your target page
+        }, 3000);
+    </script>
+</body>
+</html>
