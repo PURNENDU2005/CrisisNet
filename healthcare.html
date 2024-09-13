@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Management Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #FFDEE9, #B5AAFF); /* Soft gradient background */
+            color: #333;
+        }
+
+        header {
+            background: #1E2A78; /* Deep blue header */
+            color: #ffffff; /* White text */
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #ffffff; /* White text for nav links */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #B5AAFF; /* Light purple on hover */
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        }
+
+        main {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            padding: 20px;
+            margin: 15px;
+            width: 300px;
+            border-left: 8px solid #1E2A78; /* Deep blue accent border */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #1E2A78; /* Deep blue heading color */
+        }
+
+        .card p {
+            font-size: 1em;
+            color: #666;
+        }
+
+        .card button {
+            padding: 10px 20px;
+            background-color: #1E2A78; /* Deep blue button */
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .card button:hover {
+            background-color: #141A59; /* Darker blue on hover */
+            transform: scale(1.05); /* Slight scale on hover */
+        }
+
+        footer {
+            background: #1E2A78; /* Deep blue footer */
+            color: #ffffff; /* White text */
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Disaster Management Services</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <!-- Card 1 -->
+            <div class="card">
+                <h3>Emergency Medical Assistance</h3>
+                <p><strong>Organization:</strong> Global Health Initiative</p>
+                <p><strong>Services:</strong> Immediate medical aid, emergency response teams, field hospitals.</p>
+                <button>Learn More</button>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card">
+                <h3>Mental Health Support</h3>
+                <p><strong>Organization:</strong> Mental Health Foundation</p>
+                <p><strong>Services:</strong> Counseling, therapy sessions, crisis intervention support.</p>
+                <button>Learn More</button>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <h3>Healthcare Facilities</h3>
+                <p><strong>Organization:</strong> Relief Healthcare Network</p>
+                <p><strong>Services:</strong> Mobile clinics, temporary health centers, vaccination services.</p>
+                <button>Learn More</button>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="card">
+                <h3>Medical Supplies Distribution</h3>
+                <p><strong>Organization:</strong> Aid for Health</p>
+                <p><strong>Services:</strong> Distribution of essential medical supplies, medicines, and first aid kits.</p>
+                <button>Learn More</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Disaster Management Portal. All rights reserved.</p>
+    </footer>
+</body>
+</html>
