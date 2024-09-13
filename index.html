@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Slider with Overlapping Cards</title>
+  <title>Hero Page with One Card</title>
   <style>
+    /* General Styles */
     * {
       margin: 0;
       padding: 0;
@@ -13,185 +14,131 @@
 
     body {
       font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      height: 100vh;
     }
 
-    
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 0.2cm;
-  padding: 20px 100px;
-  background: rgba(0, 0, 0, 0.219);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 14px 15px -1px rgba(0, 0, 0, 0.163),
-    0 6px 10px -1px rgba(0, 0, 0, 0.111);
-  /* border-bottom: 0.1px solid rgba(255, 255, 255, 0.18); */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 10;
-  transition: 0.55s ease transform;
-  gap: 6cm;
-}
-
-.hidden {
-  transform: translateY(-100%);
-}
-
-.logo {
-  font-size: 32px;
-  color: aliceblue;
-  text-decoration: none;
-  font-weight: 700;
-  margin-left: 5px;
-}
-
-.navbar a {
-  font-size: 23px;
-  color: rgb(255, 255, 255);
-  font-weight: 900;
-  text-decoration: none;
-  margin-left: 50px;
-  background: rgba(0, 0, 0, 0);
-  z-index: 111;
-}
-
-.navbar {
-  margin-left: 1cm;
-}
-
-    /* Sliding Image Section */
-    .slider {
+    /* Navbar Styles */
+    .navbar {
+      background-color: #333;
+      padding: 10px 20px;
+      position: fixed;
       width: 100%;
-      height: 650px; /* Adjust the height as per your need */
-      overflow: hidden;
-      position: relative;
-      background-color: #4A7AB7;
+      top: 0;
+      z-index: 1;
     }
 
-    .slides {
-      display: flex;
-      width: 400%;
-      height: 100%;
-      animation: slide 12s infinite;
-    }
-
-    .slide {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* @keyframes slide {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-100%); }
-      50% { transform: translateX(-200%); }
-      75% { transform: translateX(-300%); }
-      100% { transform: translateX(0); }
-    } */
-
-    /* Card Section */
-    .card-section {
-      width: 20cm;
-      position: relative;
-      top: -170px; /* Adjust to slightly overlap with the slider */
-      display: flex;
-      justify-content: center;
-      background-color: #31b7ff72;
-      height: 170px; /* 7cm in height */
-      /* padding: 10px; */
-      border-radius: 10px;
-      z-index: 2;
-      align-items: center;
-      margin: 0 auto;
-      gap: 3cm;
-
-    }
-
-    /* .card {
-      background-color: #ff8b34;
-      padding: 10px;
-      border-radius: 10px;
+    .navbar ul {
+      list-style-type: none;
       text-align: center;
-      width: 200px; 
-      height: 140px;
+    }
+
+    .navbar ul li {
+      display: inline-block;
       margin: 0 20px;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .navbar ul li a:hover {
+      color: #ddd;
+    }
+
+    /* Hero Section Styles */
+    .hero {
       display: flex;
       flex-direction: column;
       justify-content: center;
-    } */
-
-    .card img {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 10px;
+      align-items: center;
+      text-align: center;
+      height: 100vh;
+      background-image: url('https://images.pexels.com/photos/6471969/pexels-photo-6471969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding-top: 60px; /* Padding for the navbar */
+      position: relative;
     }
 
-    .card button {
-      width: 7cm;
-      width: 10cm;
-      background-color: #000;
-      color: #fff;
-      /* padding: 30px; */
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+    }
+
+    /* Single Card Styles */
+    .card {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      color: #333;
+      position: absolute;
+      bottom: 30px; /* Moves the card to the bottom */
+      width: 500px;
+    }
+
+    .card h3 {
+      margin-bottom: 20px;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      font-size: 1.5rem;
+      color: white;
+      text-decoration: none;
       border: none;
+      background-color: #007BFF;
       border-radius: 5px;
-      cursor: pointer;
     }
 
-    .card button:hover {
-      background-color: #333;
+    .btn:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
 
-  <header class="header">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-    <a href="#" class="logo">NutriFarm</a>
+  <!-- Hero Section -->
+  <div class="hero">
+    <h1>Welcome to Our Website</h1>
+    <p>Your go-to platform for all your needs</p>
 
-    <nav class="navbar">
-        <a href="#home">Home</a>
-        <a href="#learn">Learn</a>
-        <a href="farm.html">Farm</a>
-        <a href="#about">About</a>
-    </nav>
-</header>
-
-  <!-- Sliding Images Section -->
-  <div class="slider">
-    <div class="slides">
-      <div class="slide"><img src="https://www.dailypioneer.com/uploads/igallery/today-s-photos--ndrf-workers-rescue-people-from-flood-2-2019-10-01.jpg" alt="Slide 1"></div>
-      <div class="slide"><img src="https://img.freepik.com/free-vector/rescuer-icons-set-with-accident-symbols-flat-isolated-vector-illustration_1284-81629.jpg?w=826&t=st=1726213920~exp=1726214520~hmac=82a49d2363831b3324376ef266304a035dcc1caecb77c1d0c6c4e4ff4b5c7e28" alt="Slide 2"></div>
-      <div class="slide"><img src="https://images.pexels.com/photos/6471969/pexels-photo-6471969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Slide 3"></div>
-      <div class="slide"><img src="https://www.pexels.com/photo/flooded-small-village-with-houses-6471947/" alt="Slide 4"></div>
+    <!-- Single Card -->
+    <div class="card">
+      <h3>Choose a Service</h3>
+      <div class="button-container">
+        <a href="#service1" class="btn">DISASTER</a>
+        <a href="#service2" class="btn">SUBSISTENCE</a>
+      </div>
     </div>
   </div>
 
-  <!-- Card Section -->
-  <div class="card-section">
-    <div class="card">
-      <button onclick="openPage('disaster.html')">Go to Page 1</button>
-    </div>
-    <div class="card">
-      <button onclick="openPage('page2.html')">Go to Page 2</button>
-    </div>
-  </div>
-
-  <!-- JavaScript -->
-  <script>
-    function openPage(pageUrl) {
-      window.location.href = pageUrl;
-    }
-  </script>
 </body>
 </html>
