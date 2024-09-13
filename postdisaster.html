@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Disaster Management</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f8fe;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(90deg, #2193b0, #6dd5ed);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 6px 10px;
+            border-radius: 50px;
+            transition: background 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #48cae4;
+        }
+
+        #hero {
+            text-align: center;
+            background: linear-gradient(135deg, #00b4d8, #48cae4);
+            color: white;
+            padding: 60px 20px;
+        }
+
+        #hero h2 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background-color: #03045e;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #90e0ef;
+            transform: translateY(-3px);
+        }
+
+        section {
+            padding: 40px 30px;
+            background-color: white;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            text-align: center;
+            color: #0077b6;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        form {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 1.1rem;
+            color: #023e8a;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1.5px solid #ade8f4;
+            border-radius: 8px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #0077b6;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #03045e;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #48cae4;
+        }
+
+        .resource-list, .guideline-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .resource-item, .guideline-item {
+            width: 30%;
+            background-color: #ade8f4;
+            padding: 25px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .resource-item:hover, .guideline-item:hover {
+            transform: translateY(-8px);
+        }
+
+        .resource-item h3, .guideline-item h3 {
+            font-size: 1.4rem;
+            color: #023e8a;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #023e8a;
+            color: white;
+            padding: 20px 0;
+            font-size: 1rem;
+            margin-top: 40px;
+        }
+
+        /* Hide the damage report form initially */
+        #damage-report {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Post Disaster Management</h1>
+        <nav>
+            <ul>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#guidelines">Recovery Guidelines</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <h2>Helping Communities Recover</h2>
+        <p>Submit damage reports, find resources, and get help to rebuild faster.</p>
+        <a href="#" class="btn" onclick="showReportForm()">Report</a>
+    </section>
+
+    <!-- Damage Report Section (Hidden Initially) -->
+    <section id="damage-report">
+        <h2>Report Damage</h2>
+        <form id="damageForm">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="damageType">Type of Damage:</label>
+            <select id="damageType" name="damageType">
+                <option value="house">House</option>
+                <option value="road">Road</option>
+                <option value="agriculture">Agriculture</option>
+            </select>
+
+            <label for="description">Damage Description:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <button type="submit">Submit Report</button>
+        </form>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources">
+        <h2>Resources</h2>
+        <div class="resource-list">
+            <div class="resource-item">
+                <h3>Relief Funds</h3>
+                <p>Information on available relief funds and how to apply.</p>
+            </div>
+            <div class="resource-item">
+                <h3>Local Shelters</h3>
+                <p>Find the nearest relief shelters and support centers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guidelines Section -->
+    <section id="guidelines">
+        <h2>Recovery Guidelines</h2>
+        <div class="guideline-list">
+            <div class="guideline-item">
+                <h3>Rebuilding Homes</h3>
+                <p>Best practices and safety measures for home reconstruction.</p>
+            </div>
+            <div class="guideline-item">
+                <h3>Health Precautions</h3>
+                <p>Tips on staying healthy during recovery.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2024 Disaster Recovery Team | All Rights Reserved
+    </footer>
+
+    <script>
+        function showReportForm() {
+            // Toggle visibility of the damage report form
+            var reportSection = document.getElementById('damage-report');
+            if (reportSection.style.display === "none" || reportSection.style.display === "") {
+                reportSection.style.display = "block";
+            } else {
+                reportSection.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
