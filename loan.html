@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Services</title>
+    <style>  
+        /* General Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(90deg, #2b3a42, #3b4a58);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 0;
+        }
+
+        /* Container Styling */
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        /* Loan Cards Section */
+        .loan-options {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+        }
+
+        .loan-card {
+            background-color: white;
+            padding: 20px;
+            width: 30%;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .loan-card img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .loan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .loan-card h3 {
+            margin-top: 0;
+            color: #2b3a42;
+        }
+
+        .loan-card p {
+            color: #555;
+        }
+
+        .loan-card button {
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            text-align: center;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .loan-card button:hover {
+            background-color: #0069d9;
+        }
+
+        /* Dynamic Loan Details */
+        .loan-details {
+            display: none;
+            background-color: white;
+            padding: 30px;
+            margin-top: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        .loan-details h2 {
+            margin-top: 0;
+            color: #2b3a42;
+        }
+
+        /* Form Styling */
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .loan-options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .loan-card {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to Our Loan Services</h1>
+    <p>Choose a loan and apply easily</p>
+</header>
+
+<div class="container">
+    <!-- Loan Options Heading -->
+    <h2>Available Loan Options</h2>
+
+    <!-- Loan Cards Section -->
+    <section class="loan-options">
+        <div class="loan-card" onclick="showLoanDetails('Personal Loan')">
+            <img height="300pm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaTBNrALudejk4mgGLUGWgc0yRs5tmZFkifw&s" alt="Personal Loan Image">
+            <h3>Personal Loan</h3>
+            <p>Flexible personal loan options for your immediate needs.</p>
+            <button>Apply Now</button>
+        </div>
+
+        <div class="loan-card" onclick="showLoanDetails('Home Loan')">
+            <img height="300pm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnFFQu4E0ukWM31iHfwkd-5VoInAzgMtHoaA&s" alt="Home Loan Image">
+            <h3>Home Loan</h3>
+            <p>Get the best rates on financing your dream home.</p>
+            <button>Apply Now</button>
+        </div>
+
+        <div class="loan-card" onclick="showLoanDetails('Auto Loan')">
+            <img height="300pm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBf0YBe-_l2V2BvyHB-Y57rfAdw_J9fS0RRg&s" alt="Auto Loan Image">
+            <h3>Auto Loan</h3>
+            <p>Easy and affordable auto loans for new or used cars.</p>
+            <button>Apply Now</button>
+        </div>
+    </section>
+
+    <!-- Dynamic Loan Details Section -->
+    <section class="loan-details" id="loanDetails">
+        <h2 id="loanTitle">Loan Application</h2>
+        <p id="loanDescription">Complete the form below to proceed with your loan application.</p>
+        
+        <!-- Loan Stages -->
+        <h3>Application Stages</h3>
+        <ol>
+            <li>Enter Your Personal Information</li>
+            <li>Submit Loan Application</li>
+            <li>Receive Approval and Disbursement</li>
+        </ol>
+
+        <!-- Form -->
+        <h3>Enter Your Details</h3>
+        <form>
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Enter your full name" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter your email address" required>
+
+            <label for="amount">Loan Amount</label>
+            <input type="number" id="amount" placeholder="Enter desired loan amount" required>
+
+            <label for="income">Annual Income</label>
+            <input type="number" id="income" placeholder="Enter your annual income" required>
+
+            <label for="term">Loan Term (Years)</label>
+            <input type="number" id="term" placeholder="Enter loan term in years" required>
+
+            <button type="submit">Submit Application</button>
+        </form>
+    </section>
+
+</div>
+
+<script>
+    function showLoanDetails(loanType) {
+        // Update loan details based on the card clicked
+        const loanDetails = document.getElementById('loanDetails');
+        const loanTitle = document.getElementById('loanTitle');
+        const loanDescription = document.getElementById('loanDescription');
+        
+        loanDetails.style.display = 'block'; // Show loan details section
+
+        if (loanType === 'Personal Loan') {
+            loanTitle.textContent = 'Personal Loan Application';
+            loanDescription.textContent = 'Apply for a personal loan with flexible terms and quick approval.';
+        } else if (loanType === 'Home Loan') {
+            loanTitle.textContent = 'Home Loan Application';
+            loanDescription.textContent = 'Apply for a home loan and take the next step toward owning your dream home.';
+        } else if (loanType === 'Auto Loan') {
+            loanTitle.textContent = 'Auto Loan Application';
+            loanDescription.textContent = 'Apply for an auto loan and get the keys to your new or used car.';
+        }
+    }
+</script>
+
+</body>
+</html>
