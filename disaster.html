@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flood Alert System</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #e0f7fa, #80deea);
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #ff6f61, #ff9a8b);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .container {
+      margin: 20px auto;
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+
+    .alert-section {
+      background: #ffebee;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      animation: slideIn 1s ease-in-out;
+    }
+
+    .alert-section h2 {
+      color: #d32f2f;
+      margin-bottom: 10px;
+    }
+
+    .map-section {
+      margin-bottom: 30px;
+    }
+
+    .map-section h2 {
+      margin-bottom: 20px;
+      color: #0288d1;
+      font-size: 2rem;
+      animation: bounceIn 1s ease-in-out;
+    }
+
+    #map {
+      height: 400px;
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .camp-details-section {
+      margin-bottom: 30px;
+    }
+
+    .camp-details-card {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 1s ease-in-out;
+    }
+
+    .camp-details-card h2 {
+      color: #00796b;
+      margin-bottom: 15px;
+    }
+
+    .precautions-section {
+      background: #f1f8e9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .precautions-section h2 {
+      color: #388e3c;
+      margin-bottom: 15px;
+    }
+
+    .precautions-list {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+
+    footer {
+      background: linear-gradient(135deg, #333, #555);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+      animation: slideInUp 1s ease-in-out;
+    }
+
+    .info-box {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes bounceIn {
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Pre-Flood Alert System</h1>
+    <p>Stay Safe, Stay Informed</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Alert Section -->
+    <div class="alert-section">
+      <h2>Flood Alert</h2>
+      <p><strong>Status:</strong> Severe flood warning in your area</p>
+      <p><strong>Expected Time:</strong> 24 hours</p>
+      <p><strong>Instructions:</strong> Prepare for evacuation, move to higher ground, avoid low-lying areas.</p>
+    </div>
+
+    <!-- Map Section for Nearest Relief Camps -->
+    <div class="map-section">
+      <h2>Nearest Relief Camps</h2>
+      <div id="map"></div>
+    </div>
+
+    <!-- Relief Camp Details Section -->
+    <div class="camp-details-section">
+      <div class="camp-details-card">
+        <h2>Nearest Relief Camps:</h2>
+        <p id="nearest-camp-name">Nearest Camp: Calculating...</p>
+        <p id="nearest-camp-distance">Distance: --</p>
+        <p id="second-camp-name">Second Nearest Camp: Calculating...</p>
+        <p id="second-camp-distance">Distance: --</p>
+      </div>
+    </div>
+
+    <!-- Precautions Section -->
+    <div class="precautions-section">
+      <h2>Precautions to Take</h2>
+      <ul class="precautions-list">
+        <li>Move essential items to an upper floor or elevated area.</li>
+        <li>Turn off gas, electricity, and water if advised to do so.</li>
+        <li>Avoid walking or driving through flood waters.</li>
+        <li>Stay updated with the latest weather forecasts and local authorities.</li>
+        <li>Prepare an emergency kit with food, water, and medications.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Flood Alert System</p>
+  </footer>
+
+  <!-- Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+  <script>
+    // Sample Relief Camps Data (replace with actual data)
+    const reliefCamps = [
+      { name: 'Relief Camp A', lat: 22.452538, lng: 88.171327 },
+      { name: 'Relief Camp B', lat: 22.462834, lng: 88.188575 },
+      { name: 'Relief Camp C', lat: 22.470000, lng: 88.180000 }
+    ];
+
+    // Function to calculate distance between two coordinates (Haversine formula)
+    function calculateDistance(lat1, lng1, lat2, lng2) {
+      const R = 6371; // Radius of the Earth in km
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLng = (lng2 - lng1) * Math.PI / 180;
+      const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLng / 2) * Math.sin(dLng / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const distance = R * c;
+      return distance; // Distance in km
+    }
+
+    // Function to find the nearest and second nearest relief camps
+    function findNearestCamps(userLat, userLng) {
+      const distances = reliefCamps.map(camp => ({
+        ...camp,
+        distance: calculateDistance(userLat, userLng, camp.lat, camp.lng)
+      }));
+      
+      distances.sort((a, b) => a.distance - b.distance);
+
+      return {
+        nearest: distances[0],
+        secondNearest: distances[1]
+      };
+    }
+
+    // Initialize the map
+    var map = L.map('map').setView([22.452538, 88.171327], 13);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Marker for user's location
+    var userMarker = L.marker([0, 0]).addTo(map).bindPopup('You are here').openPopup();
+    var nearestCampMarker = null;
+    var secondNearestCampMarker = null;
+    var routeToNearest = null;
+    var routeToSecondNearest = null;
+
+    // Function to update user's location and find nearest camps
+    function updateUserLocation(position) {
+      const userLat = position.coords.latitude;
+      const userLng = position.coords.longitude;
+
+      // Update user's marker and map view
+      userMarker.setLatLng([userLat, userLng]).update();
+      map.setView([userLat, userLng], 13);
+
+      // Find the nearest and second nearest relief camps
+      const { nearest, secondNearest } = findNearestCamps(userLat, userLng);
+
+      // Update or create markers for the nearest and second nearest camps
+      if (nearest) {
+        if (nearestCampMarker) {
+          nearestCampMarker.setLatLng([nearest.lat, nearest.lng]).update();
+        } else {
+          nearestCampMarker = L.marker([nearest.lat, nearest.lng]).addTo(map)
+            .bindPopup(nearest.name)
+            .openPopup();
+        }
+
+        // Update the HTML with the nearest camp info
+        document.getElementById('nearest-camp-name').textContent = `Nearest Camp: ${nearest.name}`;
+        document.getElementById('nearest-camp-distance').textContent = `Distance: ${nearest.distance.toFixed(2)} km`;
+      }
+
+      if (secondNearest) {
+        if (secondNearestCampMarker) {
+          secondNearestCampMarker.setLatLng([secondNearest.lat, secondNearest.lng]).update();
+        } else {
+          secondNearestCampMarker = L.marker([secondNearest.lat, secondNearest.lng]).addTo(map)
+            .bindPopup(secondNearest.name)
+            .openPopup();
+        }
+
+        // Update the HTML with the second nearest camp info
+        document.getElementById('second-camp-name').textContent = `Second Nearest Camp: ${secondNearest.name}`;
+        document.getElementById('second-camp-distance').textContent = `Distance: ${secondNearest.distance.toFixed(2)} km`;
+      }
+
+      // Route to nearest relief camp
+      if (routeToNearest) {
+        map.removeControl(routeToNearest);
+      }
+      routeToNearest = L.Routing.control({
+        waypoints: [
+          L.latLng(userLat, userLng),
+          L.latLng(nearest.lat, nearest.lng)
+        ],
+        routeWhileDragging: true,
+        lineOptions: {
+          styles: [{ color: 'green', weight: 5 }]
+        }
+      }).addTo(map);
+
+      // Route to second nearest relief camp
+      if (routeToSecondNearest) {
+        map.removeControl(routeToSecondNearest);
+      }
+      routeToSecondNearest = L.Routing.control({
+        waypoints: [
+          L.latLng(userLat, userLng),
+          L.latLng(secondNearest.lat, secondNearest.lng)
+        ],
+        routeWhileDragging: true,
+        lineOptions: {
+          styles: [{ color: 'red', weight: 5 }]
+        }
+      }).addTo(map);
+    }
+
+    // Handle geolocation error
+    function handleGeolocationError() {
+      alert('Unable to retrieve your location.');
+    }
+
+    // Get the user's location
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(updateUserLocation, handleGeolocationError);
+    } else {
+      alert('Geolocation is not supported by this browser.');
+    }
+  </script>
+</body>
+</html>
