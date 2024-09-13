@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Relief and Assistance Programs</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #007bff;
+            font-size: 1.5em;
+        }
+
+        p {
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #programList {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .program-item {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .program-item:last-child {
+            border-bottom: none;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+
+        .notification.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .notification.hide {
+            opacity: 0;
+        }
+
+        .notification button {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Disaster Relief and Assistance Programs</h1>
+        <nav>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="overview">
+            <h2>About Us</h2>
+            <p>We are committed to providing timely and effective support to communities affected by disasters. Our programs offer immediate relief and long-term assistance to help individuals and families recover and rebuild.</p>
+        </section>
+
+        <section id="programs">
+            <h2>Our Programs</h2>
+            <ul id="programList">
+                <!-- Program items will be added here dynamically -->
+            </ul>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <form id="contactForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Disaster Relief and Assistance Programs. All rights reserved.</p>
+    </footer>
+
+    <div id="notification" class="notification">
+        <button onclick="hideNotification()">×</button>
+        <p id="notificationMessage"></p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const programs = [
+                { name: "Emergency Food Distribution", description: "Providing essential food supplies to affected areas." },
+                { name: "Medical Assistance", description: "Offering medical aid and healthcare services to those in need." },
+                { name: "Shelter and Housing Support", description: "Assisting with temporary shelter and long-term housing solutions." }
+            ];
+
+            const programList = document.getElementById('programList');
+
+            programs.forEach(program => {
+                const programItem = document.createElement('li');
+                programItem.classList.add('program-item');
+                programItem.innerHTML = <strong>${program.name}</strong><p>${program.description}</p>;
+                programList.appendChild(programItem);
+            });
+
+            document.getElementById('contactForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                showNotification(Thank you, ${name}. Your message has been received. We will get back to you at ${email} soon.);
+                
+                document.getElementById('contactForm').reset();
+            });
+        });
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notificationMessage');
+            notificationMessage.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                notification.classList.add('hide');
+            }, 5000); // Hide notification after 5 seconds
+        }
+
+        function hideNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.remove('show');
+            notification.classList.add('hide');
+        }
+    </script>
+</body>
+</html>
