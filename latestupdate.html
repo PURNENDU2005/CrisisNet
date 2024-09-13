@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Updates - News & Disaster Alerts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4CAF50 0%, #00A3E0 100%);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px 30px;
+            margin: 40px 0;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            color: #4CAF50;
+            margin-bottom: 40px;
+            font-weight: bold;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 30px;
+            padding-left: 10px;
+            border-left: 6px solid #4CAF50;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-card, .disaster-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .news-card:hover, .disaster-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .news-image, .disaster-icon {
+            width: 130px;
+            height: 130px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .news-content, .disaster-content {
+            flex-grow: 1;
+        }
+
+        .news-title, .disaster-title {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-description, .disaster-description {
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .news-time, .disaster-time {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #999;
+        }
+
+        .news-image:hover, .disaster-icon:hover {
+            transform: scale(1.05);
+        }
+
+        /* Disaster Section Styles */
+        .disaster-card {
+            background-color: #fff7f0;
+            border-left: 8px solid #FF6B6B;
+        }
+
+        .disaster-icon {
+            background-color: #FF6B6B;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            color: #fff;
+            border-radius: 50%;
+        }
+
+        .disaster-icon i {
+            font-size: 3em;
+        }
+
+        /* Media Queries for Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .news-card, .disaster-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .news-image, .disaster-icon {
+                width: 100px;
+                height: 100px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .news-title, .disaster-title {
+                font-size: 1.4em;
+            }
+
+            .news-description, .disaster-description {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Latest Updates</h1>
+
+        <!-- Local News Section -->
+        <div class="section">
+            <h2 class="section-title">Nearby Local News</h2>
+            
+            <!-- Example News Card 1 -->
+            <div class="news-card">
+                <div class="news-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYwL9igWSze_O21NqhGYTW3AtsQ-mqN_0Sbg&s');"></div>
+                <div class="news-content">
+                    <h3 class="news-title">New Park Opening in the Neighborhood</h3>
+                    <p class="news-description">
+                        A new community park is set to open this weekend, featuring a playground, walking trails, and picnic areas. The event will have free food and activities for all ages.
+                    </p>
+                    <p class="news-time">Published 2 hours ago</p>
+                </div>
+            </div>
+
+            <!-- Example News Card 2 -->
+            <div class="news-card">
+                <div class="news-image" style="background-image: url('https://www.shutterstock.com/image-photo/honolulu-june-26-2013-cars-260nw-281829572.jpg');"></div>
+                <div class="news-content">
+                    <h3 class="news-title">Traffic Delays Due to Road Construction</h3>
+                    <p class="news-description">
+                        Roadwork on Main Street will continue through the week, causing significant traffic delays. Commuters are encouraged to use alternate routes or public transport.
+                    </p>
+                    <p class="news-time">Published 3 hours ago</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Disaster Alerts Section -->
+        <div class="section">
+            <h2 class="section-title">Upcoming Disaster Alerts</h2>
+
+            <!-- Example Disaster Alert 1 -->
+            <div class="disaster-card">
+                <div class="disaster-icon">
+                    <i>⚠️</i>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Flood Warning in Riverbank Area</h3>
+                    <p class="disaster-description">
+                        Heavy rainfall in the upcoming days may cause flooding in low-lying areas near the riverbank. Residents are advised to stay alert and prepare for potential evacuation.
+                    </p>
+                    <p class="disaster-time">Alert for September 15, 2024</p>
+                </div>
+            </div>
+
+            <!-- Example Disaster Alert 2 -->
+            <div class="disaster-card">
+                <div class="disaster-icon" style="background-color: #FFA726;">
+                    <i>🔥</i>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Extreme Heatwave Expected Next Week</h3>
+                    <p class="disaster-description">
+                        An intense heatwave is expected to hit the region next week, with temperatures exceeding 40°C. Citizens are urged to stay indoors, drink plenty of water, and avoid outdoor activities.
+                    </p>
+                    <p class="disaster-time">Alert for September 17, 2024</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
