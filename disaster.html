@@ -39,6 +39,7 @@
       margin: 20px auto;
       max-width: 1200px;
       padding: 0 20px;
+      pointer-events: none;
     }
 
     .alert-section {
@@ -57,6 +58,7 @@
 
     .map-section {
       margin-bottom: 30px;
+      pointer-events: none;
     }
 
     .map-section h2 {
@@ -64,6 +66,7 @@
       color: #0288d1;
       font-size: 2rem;
       animation: bounceIn 1s ease-in-out;
+      pointer-events: none;
     }
 
     #map {
@@ -71,10 +74,12 @@
       width: 100%;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      pointer-events: none;
     }
 
     .camp-details-section {
       margin-bottom: 30px;
+      pointer-events: none;
     }
 
     .camp-details-card {
@@ -83,6 +88,7 @@
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       animation: fadeInUp 1s ease-in-out;
+      pointer-events: none;
     }
 
     .camp-details-card h2 {
@@ -159,7 +165,7 @@
 <body>
 
   <header>
-    <h1>Flood Alert System</h1>
+    <h1>Pre-Flood Alert System</h1>
     <p>Stay Safe, Stay Informed</p>
   </header>
 
@@ -204,6 +210,9 @@
 
   </div>
 
+  <footer>
+    <p>&copy; 2024 Flood Alert System</p>
+  </footer>
 
   <!-- Leaflet JavaScript -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -213,7 +222,7 @@
     // Sample Relief Camps Data (replace with actual data)
     const reliefCamps = [
       { name: 'Relief Camp A', lat: 22.452538, lng: 88.171327 },
-      { name: 'Relief Camp B', lat: 22.478646  , lng: 88.178471 },
+      { name: 'Relief Camp B', lat: 22.462834, lng: 88.188575 },
       { name: 'Relief Camp C', lat: 22.470000, lng: 88.180000 }
     ];
 
@@ -343,6 +352,11 @@
     } else {
       alert('Geolocation is not supported by this browser.');
     }
+
+    // Redirect to during.html after 3 seconds
+    setTimeout(function() {
+      window.location.href = 'during.html';
+    }, 7000);
   </script>
 </body>
 </html>
