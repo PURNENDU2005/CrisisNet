@@ -5,65 +5,181 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>During Disaster - Need Assessment & Rescue Operation</title>
     <style>
-        body {
+                body {
             font-family: Arial, sans-serif;
             background-color: #f0f8ff;
             margin: 0;
             padding: 0;
+            color: #333;
         }
         header {
-            background-color: #008cba;
+            background-color: #4a90e2;
             color: white;
-            padding: 10px;
+            padding: 20px;
             text-align: center;
+            border-bottom: 4px solid #357abd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
         .container {
             padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        .section {
-            background-color: #ffffff;
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .card {
+            background: linear-gradient(145deg, #ffffff, #e2e2e2);
             border: 1px solid #ddd;
-            border-radius: 5px;
-            margin: 20px 0;
+            border-radius: 15px;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            margin-bottom: 20px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .card:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+            transform: scale(1.02);
+        }
+        .card:nth-of-type(1) {
+            background: linear-gradient(135deg, #f9c2ff, #a2c2e4);
+        }
+        .card:nth-of-type(2) {
+            background: linear-gradient(135deg, #ffeb3b, #21ffcb);
         }
         h2 {
-            color: #333;
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
         label {
             display: block;
             margin: 10px 0 5px;
+            font-weight: bold;
         }
         input[type="text"], input[type="file"], textarea, select {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
+            width: calc(100% - 24px);
+            padding: 12px;
+            border-radius: 8px;
             border: 1px solid #ddd;
             box-sizing: border-box;
+            margin-bottom: 10px;
+            background-color: #ffffff;
+        }
+        textarea {
+            resize: vertical;
         }
         button {
-            background-color: #008cba;
+            background-color: #4a90e2;
             color: white;
-            padding: 10px 15px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 1em;
+            margin: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
         button:hover {
-            background-color: #005f75;
+            background-color: #357abd;
+            transform: scale(1.05);
         }
         .map {
             margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            border: 1px solid #ddd;
         }
         .checkbox-group {
             display: flex;
             flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
         }
         .checkbox-group label {
-            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .checkbox-group label:hover {
+            background-color: #e0e0e0;
+        }
+        .dynamic-needs {
+            margin-top: 10px;
+        }
+        .dynamic-needs input {
+            margin-top: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: calc(100% - 20px);
+            background-color: #ffffff;
+        }
+        #needAssessmentForm {
+            display: none; /* Form is hidden initially */
+        }
+        .toggle-button {
+            background-color: #28a745;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .toggle-button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
         }
     </style>
+
+    <!-- Firebase scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js"></script>
+
+    <!-- Initialize Firebase -->
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+    </script>
 </head>
 <body>
 
@@ -73,85 +189,147 @@
 </header>
 
 <div class="container">
+    <div class="flex-container">
+        <!-- Need Assessment Card -->
+        <div class="card" id="needAssessmentSection">
+            <h2>Need Assessment</h2>
+            <button class="toggle-button" onclick="toggleNeedAssessmentForm()">Need Assessment Form</button>
+            <form id="needAssessmentForm">
+                <!-- Your form fields here -->
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
 
-    <!-- Need Assessment Section -->
-    <div class="section">
-        <h2>Need Assessment</h2>
-        <form id="needAssessmentForm">
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
 
-            <label for="name">Full Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                <label for="essentialItems">What do you need?</label>
+                <div class="checkbox-group">
+                    <!-- Checkboxes for needs -->
+                </div>
 
-            <label for="phone">Phone Number:</label>
-            <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+                <label for="customNeed">Add more needs:</label>
+                <div id="additionalNeeds"></div>
+                <button type="button" onclick="addNeed()">+ Add Extra Need</button>
 
-            <label for="essentialItems">What do you need?</label>
-            <div class="checkbox-group">
-                <label><input type="checkbox" name="needs" value="Baby Food"> Baby Food</label>
-                <label><input type="checkbox" name="needs" value="Medicine"> Medicine</label>
-                <label><input type="checkbox" name="needs" value="Water"> Water</label>
-                <label><input type="checkbox" name="needs" value="Clothes"> Clothes</label>
-                <label><input type="checkbox" name="needs" value="Shelter"> Shelter</label>
-                <label><input type="checkbox" name="needs" value="Food"> Food</label>
-                <label><input type="checkbox" name="needs" value="Sanitary Products"> Sanitary Products</label>
-            </div>
+                <label for="additionalDetails">Additional Details:</label>
+                <textarea id="additionalDetails" name="additionalDetails" rows="4" placeholder="Any additional requirements or details"></textarea>
 
-            <label for="additionalDetails">Additional Details:</label>
-            <textarea id="additionalDetails" name="additionalDetails" rows="4" placeholder="Any additional requirements or details"></textarea>
+                <label for="imageUpload">Upload an image (if necessary):</label>
+                <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
 
-            <label for="imageUpload">Upload an image (if necessary):</label>
-            <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
+                <button type="submit">Submit Need Assessment</button>
+            </form>
+        </div>
 
-            <button type="submit">Submit Need Assessment</button>
-        </form>
+        <!-- Rescue Operation Card -->
+        <div class="card">
+            <h2>Rescue Operation</h2>
+            <p>Request rescue by sending your current location to the relief force:</p>
+
+            <!-- SOS Button to Send Live Location to Relief Force -->
+            <button onclick="sendSOS()" style="background-color: #e74c3c;">SOS - Send Live Location</button>
+
+            <!-- Placeholder for showing map or location information -->
+            <div class="map" id="map"></div>
+        </div>
     </div>
-
-    <!-- Rescue Operation Section -->
-    <div class="section">
-        <h2>Rescue Operation</h2>
-        <p>Request rescue by sharing your current location:</p>
-        <button onclick="requestRescue()">Send Location for Rescue</button>
-
-        <!-- Placeholder for showing map or location information -->
-        <div class="map" id="map"></div>
-    </div>
-
 </div>
 
 <script>
+    // Function to toggle visibility of the need assessment form
+    function toggleNeedAssessmentForm() {
+        const form = document.getElementById("needAssessmentForm");
+        form.style.display = form.style.display === "none" ? "block" : "none";
+    }
+
+    // Function to dynamically add new input fields for extra needs
+    function addNeed() {
+        const additionalNeedsDiv = document.getElementById('additionalNeeds');
+        const newNeedInput = document.createElement('input');
+        newNeedInput.setAttribute('type', 'text');
+        newNeedInput.setAttribute('name', 'extraNeed');
+        newNeedInput.setAttribute('placeholder', 'Enter extra need');
+        additionalNeedsDiv.appendChild(newNeedInput);
+    }
+
+    // Function to capture user location
+    function getUserLocation(callback) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    callback(position.coords.latitude, position.coords.longitude);
+                },
+                (error) => {
+                    alert("Error getting location: " + error.message);
+                    callback(null, null);
+                }
+            );
+        } else {
+            alert("Geolocation is not supported by this browser.");
+            callback(null, null);
+        }
+    }
+
     // Handle form submission for need assessment
     document.getElementById("needAssessmentForm").addEventListener("submit", function(event) {
         event.preventDefault();
-        const name = document.getElementById("name").value;
-        const phone = document.getElementById("phone").value;
-        const needs = [...document.querySelectorAll('input[name="needs"]:checked')].map(el => el.value).join(", ");
-        const additionalDetails = document.getElementById("additionalDetails").value;
-        const imageUpload = document.getElementById("imageUpload").files[0];
 
-        if (!needs) {
-            alert("Please select at least one essential item.");
-            return;
-        }
+        // Capture user location
+        getUserLocation((lat, lon) => {
+            if (lat === null || lon === null) {
+                return; // Exit if location could not be obtained
+            }
 
-        let message = `Need assessment submitted by ${name}:\nPhone: ${phone}\nNeeds: ${needs}\nAdditional Details: ${additionalDetails}`;
-        if (imageUpload) {
-            message += `\nImage uploaded: ${imageUpload.name}`;
-        }
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const needs = [...document.querySelectorAll('input[name="needs"]:checked')].map(el => el.value).join(", ");
+            const extraNeeds = [...document.querySelectorAll('input[name="extraNeed"]')].map(el => el.value).join(", ");
+            const additionalDetails = document.getElementById("additionalDetails").value;
+            const imageUpload = document.getElementById("imageUpload").files[0];
 
-        alert(message);
+            if (!needs && !extraNeeds) {
+                alert("Please select or enter at least one need.");
+                return;
+            }
 
-        // Here, you can implement logic to send data to the server or save it
+            // Create an object to send to Firebase
+            const assessmentData = {
+                name: name,
+                phone: phone,
+                needs: needs,
+                extraNeeds: extraNeeds,
+                additionalDetails: additionalDetails,
+                imageUpload: imageUpload ? imageUpload.name : null,
+                location: {
+                    latitude: lat,
+                    longitude: lon
+                }
+            };
+
+            // Push data to Firebase Realtime Database
+            database.ref('needAssessments').push(assessmentData, (error) => {
+                if (error) {
+                    alert("Error sending data: " + error.message);
+                } else {
+                    alert("Need assessment successfully submitted!");
+                    document.getElementById("needAssessmentForm").reset(); // Reset form after successful submission
+                    toggleNeedAssessmentForm(); // Hide the form
+                }
+            });
+        });
     });
 
-    // Function to request rescue by sending location
-    function requestRescue() {
+    // Function to send live location for SOS
+    function sendSOS() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, showError);
+            navigator.geolocation.watchPosition(showPosition, showError);
+            alert("SOS activated! Your live location is being sent to the relief force.");
         } else {
             document.getElementById("map").innerHTML = "Geolocation is not supported by this browser.";
         }
     }
 
+    // Function to display the position on the map
     function showPosition(position) {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
@@ -162,6 +340,7 @@
         alert("Your location has been shared for rescue: Latitude " + lat + ", Longitude " + lon);
     }
 
+    // Error handling for geolocation
     function showError(error) {
         switch(error.code) {
             case error.PERMISSION_DENIED:
