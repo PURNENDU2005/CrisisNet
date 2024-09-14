@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>During Disaster - Need Assessment & Rescue Operation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #008cba;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        .section {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 20px 0;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="file"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #008cba;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005f75;
+        }
+        .map {
+            margin-top: 20px;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .checkbox-group label {
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>During Disaster</h1>
+    <p>Need Assessment & Rescue Operation</p>
+</header>
+
+<div class="container">
+
+    <!-- Need Assessment Section -->
+    <div class="section">
+        <h2>Need Assessment</h2>
+        <form id="needAssessmentForm">
+
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+            <label for="essentialItems">What do you need?</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="needs" value="Baby Food"> Baby Food</label>
+                <label><input type="checkbox" name="needs" value="Medicine"> Medicine</label>
+                <label><input type="checkbox" name="needs" value="Water"> Water</label>
+                <label><input type="checkbox" name="needs" value="Clothes"> Clothes</label>
+                <label><input type="checkbox" name="needs" value="Shelter"> Shelter</label>
+                <label><input type="checkbox" name="needs" value="Food"> Food</label>
+                <label><input type="checkbox" name="needs" value="Sanitary Products"> Sanitary Products</label>
+            </div>
+
+            <label for="additionalDetails">Additional Details:</label>
+            <textarea id="additionalDetails" name="additionalDetails" rows="4" placeholder="Any additional requirements or details"></textarea>
+
+            <label for="imageUpload">Upload an image (if necessary):</label>
+            <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
+
+            <button type="submit">Submit Need Assessment</button>
+        </form>
+    </div>
+
+    <!-- Rescue Operation Section -->
+    <div class="section">
+        <h2>Rescue Operation</h2>
+        <p>Request rescue by sharing your current location:</p>
+        <button onclick="requestRescue()">Send Location for Rescue</button>
+
+        <!-- Placeholder for showing map or location information -->
+        <div class="map" id="map"></div>
+    </div>
+
+</div>
+
+<script>
+    // Handle form submission for need assessment
+    document.getElementById("needAssessmentForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+        const needs = [...document.querySelectorAll('input[name="needs"]:checked')].map(el => el.value).join(", ");
+        const additionalDetails = document.getElementById("additionalDetails").value;
+        const imageUpload = document.getElementById("imageUpload").files[0];
+
+        if (!needs) {
+            alert("Please select at least one essential item.");
+            return;
+        }
+
+        let message = `Need assessment submitted by ${name}:\nPhone: ${phone}\nNeeds: ${needs}\nAdditional Details: ${additionalDetails}`;
+        if (imageUpload) {
+            message += `\nImage uploaded: ${imageUpload.name}`;
+        }
+
+        alert(message);
+
+        // Here, you can implement logic to send data to the server or save it
+    });
+
+    // Function to request rescue by sending location
+    function requestRescue() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            document.getElementById("map").innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        document.getElementById("map").innerHTML = `<p>Latitude: ${lat}</p><p>Longitude: ${lon}</p>`;
+
+        // Send location data to server or rescue team
+        alert("Your location has been shared for rescue: Latitude " + lat + ", Longitude " + lon);
+    }
+
+    function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                document.getElementById("map").innerHTML = "User denied the request for Geolocation.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                document.getElementById("map").innerHTML = "Location information is unavailable.";
+                break;
+            case error.TIMEOUT:
+                document.getElementById("map").innerHTML = "The request to get user location timed out.";
+                break;
+            case error.UNKNOWN_ERROR:
+                document.getElementById("map").innerHTML = "An unknown error occurred.";
+                break;
+        }
+    }
+</script>
+
+</body>
+</html>
