@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>During Disaster - Emergency Instructions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FF6B6B 0%, #FFA726 100%);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px 30px;
+            margin: 40px 0;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.8em;
+            color: #FF6B6B;
+            margin-bottom: 40px;
+            font-weight: bold;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #FF6B6B;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 6px solid #FF6B6B;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .instructions-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .instructions-list li {
+            background-color: #fff8f0;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .instructions-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .instructions-list li i {
+            font-size: 1.5em;
+            color: #FF6B6B;
+        }
+
+        .instructions-text {
+            flex-grow: 1;
+            font-size: 1.1em;
+            color: #444;
+        }
+
+        /* Live Updates Section */
+        .live-updates {
+            background-color: #fff3e6;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .update-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #FF6B6B;
+        }
+
+        .update-item:last-child {
+            border-bottom: none;
+        }
+
+        .update-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #d9534f;
+        }
+
+        .update-time {
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #999;
+        }
+
+        /* Emergency Contacts Section */
+        .emergency-contacts {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            width: 45%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #FF6B6B;
+            margin-bottom: 10px;
+        }
+
+        .contact-number {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-number a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-number a:hover {
+            color: #FF6B6B;
+        }
+
+        .contact-description {
+            font-size: 1em;
+            color: #666;
+        }
+
+        /* Call Icon Styling */
+        .call-icon {
+            font-size: 1.2em;
+            color: #FF6B6B;
+        }
+
+        /* Problem Reporting Section */
+        .problem-section {
+            background-color: #fff8f0;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .problem-section h2 {
+            font-size: 1.8em;
+            color: #FF6B6B;
+            margin-bottom: 20px;
+            border-left: 6px solid #FF6B6B;
+            padding-left: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .problem-section textarea {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 2px solid #FF6B6B;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            resize: vertical;
+        }
+
+        .problem-section input[type="file"] {
+            margin-bottom: 20px;
+        }
+
+        .problem-section button {
+            background-color: #FF6B6B;
+            color: white;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .problem-section button:hover {
+            background-color: #ff4c4c;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2em;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .instructions-list li {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-card {
+                width: 100%;
+            }
+
+            .problem-section textarea {
+                font-size: 1em;
+            }
+        }
+    </style>
+    <script>
+        function submitProblem() {
+            // Get the textarea value
+            var problemDescription = document.querySelector('textarea').value;
+
+            // Check if the textarea is empty
+            if (problemDescription === "") {
+                alert("Please describe the problem before submitting.");
+            } else {
+                alert("Thank you for your submission! We'll look into the problem.");
+            }
+
+            // Prevent the form from reloading the page (default behavior)
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>During Disaster: Emergency Guidelines</h1>
+
+        <!-- Emergency Instructions Section -->
+        <div class="section">
+            <h2 class="section-title">Emergency Instructions</h2>
+            <ul class="instructions-list">
+                <li>
+                    <i>🏠</i>
+                    <span class="instructions-text">Stay indoors and seek shelter in the safest part of your house, away from windows and external walls.</span>
+                </li>
+                <li>
+                    <i>📻</i>
+                    <span class="instructions-text">Keep a battery-powered radio with you to receive official news and disaster updates.</span>
+                </li>
+                <li>
+                    <i>🆘</i>
+                    <span class="instructions-text">If instructed, evacuate immediately and follow the routes designated by emergency officials.</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Live Updates Section -->
+        <div class="section">
+            <h2 class="section-title">Live Updates</h2>
+            <div class="live-updates">
+                <div class="update-item">
+                    <p class="update-title">Severe flooding in coastal areas, residents advised to evacuate.</p>
+                    <p class="update-time">10:30 AM, Sep 14, 2024</p>
+                </div>
+                <div class="update-item">
+                    <p class="update-title">Power outages reported in several regions, officials working on restoration.</p>
+                    <p class="update-time">9:15 AM, Sep 14, 2024</p>
+                </div>
+                <div class="update-item">
+                    <p class="update-title">Road closures due to landslides in the mountainous region, avoid travel.</p>
+                    <p class="update-time">8:45 AM, Sep 14, 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Emergency Contacts Section -->
+        <div class="section">
+            <h2 class="section-title">Emergency Contacts</h2>
+            <div class="emergency-contacts">
+                <div class="contact-card">
+                    <h3 class="contact-title">Fire Department</h3>
+                    <p class="contact-number"><i class="call-icon">📞</i><a href="tel:+1234567890">+1 234-567-890</a></p>
+                    <p class="contact-description">Call for fire emergencies, rescues, or hazardous situations.</p>
+                </div>
+                <div class="contact-card">
+                    <h3 class="contact-title">Medical Assistance</h3>
+                    <p class="contact-number"><i class="call-icon">📞</i><a href="tel:+1234567891">+1 234-567-891</a></p>
+                    <p class="contact-description">Contact for any medical emergencies or urgent health-related issues.</p>
+                </div>
+                <div class="contact-card">
+                    <h3 class="contact-title">Police Department</h3>
+                    <p class="contact-number"><i class="call-icon">📞</i><a href="tel:+1234567892">+1 234-567-892</a></p>
+                    <p class="contact-description">For security concerns, evacuation orders, or assistance with evacuations.</p>
+                </div>
+                <div class="contact-card">
+                    <h3 class="contact-title">Disaster Relief</h3>
+                    <p class="contact-number"><i class="call-icon">📞</i><a href="tel:+1234567893">+1 234-567-893</a></p>
+                    <p class="contact-description">For shelter and basic needs, contact local disaster relief services.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Report Problem Section -->
+        <div class="problem-section">
+            <h2>Report a Problem</h2>
+            <textarea rows="5" placeholder="Describe the issue here..."></textarea>
+            <input type="file" accept="image/*">
+            <button onclick="submitProblem()">Submit Report</button>
+        </div>
+    </div>
+</body>
+</html>
