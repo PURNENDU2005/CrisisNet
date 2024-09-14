@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Organization with Map and Need Assessment</title>
+    <!-- Include Leaflet.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #2b6d82;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .header img {
+            width: 80px;
+            border-radius: 50%;
+        }
+
+        .header h1 {
+            margin: 10px 0;
+        }
+
+        .nav {
+            margin-top: 15px;
+        }
+
+        .nav a {
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .nav a:hover {
+            background-color: #224c60;
+            padding: 12px;
+            border-radius: 5px;
+        }
+
+        /* Main Content */
+        .container {
+            padding: 20px;
+        }
+
+        .section {
+            background-color: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #2b6d82;
+        }
+
+        .section p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Map Section */
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        /* Need Assessment Section */
+        .need-assessment {
+            margin-top: 20px;
+        }
+
+        .need-assessment h2 {
+            color: #2b6d82;
+        }
+
+        .need-assessment form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .need-assessment label {
+            font-weight: bold;
+        }
+
+        .need-assessment input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .need-assessment button {
+            background-color: #2b6d82;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .need-assessment button:hover {
+            background-color: #224c60;
+        }
+
+        /* Donate Section */
+        .donate-button {
+            background-color: #d9534f;
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .donate-button:hover {
+            background-color: #c9302c;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #2b6d82;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            padding: 0 10px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .volunteer-form input, .volunteer-form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header Section -->
+<div class="header">
+    <img src="ngo_logo.png" alt="NGO Logo">
+    <h1>Helping Hands NGO</h1>
+    <div class="nav">
+        <a href="#about">About Us</a>
+        <a href="#volunteer">Volunteer</a>
+        <a href="#map-section">Map</a>
+        <a href="#assessment">Need Assessment</a>
+        <a href="#donate">Donate</a>
+        <a href="#contact">Contact Us</a>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+
+    <!-- About Us Section -->
+    <div class="section" id="about">
+        <h2>About Us</h2>
+        <p>At Helping Hands NGO, our mission is to uplift the underprivileged by providing access to food, education, and essential healthcare services. Our team of passionate volunteers works across multiple regions to bring sustainable change and make a lasting impact in local communities.</p>
+    </div>
+
+    <!-- Map Section -->
+    <div class="section" id="map-section">
+        <h2>Disaster Area & Shelter Points</h2>
+        <p>View disaster areas and nearby shelter points on the map. Click on the markers to get more information about the shelters and disaster zones.</p>
+        <!-- Map Container -->
+        <div id="map"></div>
+    </div>
+
+    <!-- Need Assessment Section -->
+    <div class="section need-assessment" id="assessment">
+        <h2>Need Assessment</h2>
+        <p>Provide information about areas that need assistance. Enter the details of the shelter point and the number of people in need.</p>
+        <form id="assessment-form">
+            <label for="area-name">Area Name:</label>
+            <input type="text" id="area-name" placeholder="Enter Area Name" required>
+
+            <label for="shelter-point">Shelter Point:</label>
+            <input type="text" id="shelter-point" placeholder="Enter Shelter Point" required>
+
+            <label for="people-number">People Number:</label>
+            <input type="number" id="people-number" placeholder="Enter Number of People" required>
+
+            <button type="submit">Submit Assessment</button>
+        </form>
+    </div>
+
+    <!-- Donate Section -->
+    <div class="section donate-section" id="donate">
+        <h2>Support Our Cause</h2>
+        <p>Your contributions help us provide essential services to those in need. Whether it's a one-time donation or a recurring gift, every dollar makes a difference.</p>
+        <button class="donate-button">Donate Now</button>
+    </div>
+
+</div>
+
+<!-- Footer Section -->
+<div class="footer" id="contact">
+    <p>Contact Us: info@helpinghands.org | 123-456-7890</p>
+    <div>
+        <a href="#">Facebook</a> | 
+        <a href="#">Instagram</a> | 
+        <a href="#">Twitter</a>
+    </div>
+    <p>&copy; 2024 Helping Hands NGO. All Rights Reserved.</p>
+</div>
+
+<!-- Include Leaflet.js Script -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    // Initialize the map and set its view to a specific location (latitude, longitude) and zoom level
+    var map = L.map('map').setView([51.505, -0.09], 13); // Example: center at London
+
+    // Add a tile layer (openstreetmap) to the map
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Example shelter points with information
+    var shelterPoints = [
+        {
+            name: "Shelter 1",
+            lat: 51.505,
+            lon: -0.09,
+            people: 100
+        },
+        {
+            name: "Shelter 2",
+            lat: 51.51,
+            lon: -0.1,
+            people: 150
+        }
+    ];
+
+    // Add markers for each shelter point
+    shelterPoints.forEach(function(shelter) {
+        var marker = L.marker([shelter.lat, shelter.lon]).addTo(map);
+        marker.bindPopup("<b>" + shelter.name + "</b><br>People: " + shelter.people);
+    });
+
+    // Example disaster zone
+    var disasterZone = L.circle([51.508, -0.11], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 500
+    }).addTo(map);
+    disasterZone.bindPopup("Disaster Area");
+
+    // Handle Need Assessment form submission
+    document.getElementById('assessment-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var areaName = document.getElementById('area-name').value;
+        var shelterPoint = document.getElementById('shelter-point').value;
+        var peopleNumber = document.getElementById('people-number').value;
+
+        alert('Assessment Submitted for Area: ' + areaName + '\nShelter Point: ' + shelterPoint + '\nPeople Number: ' + peopleNumber);
+
+        // Clear form after submission
+        document.getElementById('assessment-form').reset();
+    });
+</script>
+</body>
+</html>
